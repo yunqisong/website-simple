@@ -31,7 +31,7 @@ onUnmounted(() => {
 #app {
   z-index: 1;
   position: relative;
-  background: #fcfcfc;
+  background: #f7f8fa;
   font-family: PingFangSC-Regular, PingFang SC;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
