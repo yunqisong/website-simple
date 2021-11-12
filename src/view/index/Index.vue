@@ -146,7 +146,7 @@ pros();
 
 .ad-b {
   position: fixed;
-  max-width: 100px;
+  max-width: 200px;
   // height: 100px;
   z-index: 999;
   &--l {
@@ -161,8 +161,8 @@ pros();
 
 .ad-d {
   position: fixed;
-  max-width: 200px;
-  max-height: 200px;
+  max-width: 100px;
+  max-height: 100px;
   z-index: 990;
   &:hover {
     transform: scale(1.1);
