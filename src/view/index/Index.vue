@@ -104,10 +104,10 @@ pros();
     </div>
 
     <!-- 两边可放大模块 -->
-    <div class="ad-d ad-d--l" :style="{top: (-110 + (i * 210)) + 'px'}" v-for="i in 3" :key="i">
+    <div class="ad-d ad-d--l" :style="{top: ((i * 110)) + 'px'}" v-for="i in 3" :key="i">
       <AdRow :data="first.d[i]" fit="fill"/>
     </div>
-    <div class="ad-d ad-d--r" :style="{top: (-110 + (i * 210)) + 'px'}" v-for="i in 2" :key="i">
+    <div class="ad-d ad-d--r" :style="{top: ((i * 110)) + 'px'}" v-for="i in 2" :key="i">
       <AdRow :data="first.d[i + 2]" fit="fill"/>
     </div>
 
@@ -146,7 +146,7 @@ pros();
 
 .ad-b {
   position: fixed;
-  max-width: 200px;
+  max-width: 100px;
   // height: 100px;
   z-index: 999;
   &--l {
