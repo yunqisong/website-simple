@@ -3,7 +3,7 @@ import CommonHeader from "./CommonHeader.vue";
 import {ref} from 'vue'
 
 const isIframe = ref(false)
-axios.get('/api/base/page/o').then(res => {
+axios.get('/api/base/page/0').then(res => {
   isIframe.value = !!(+res.data.data)
 })
 </script>

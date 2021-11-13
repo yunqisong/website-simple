@@ -12,7 +12,7 @@ defineProps({
       <img :src="it.img" alt="">
       <div>{{it.temp}}</div>
       <div>{{it.weather}}</div>
-      <div>{{it.wind}}阿法士大阿</div>
+      <div>{{it.wind}}</div>
     </div>
   </div>
 </template>
