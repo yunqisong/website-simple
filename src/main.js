@@ -11,12 +11,16 @@ import "element-plus/dist/index.css";
 import "font-awesome/css/font-awesome.css";
 import axios from "axios";
 import { encode, decode } from 'js-base64';
-import encodeUtf8 from 'encode-utf8'
+import encodeUtf8 from 'encode-utf8';
 window.axios = axios;
 window.encode = encode;
 window.encodeUtf8 = encodeUtf8;
 
+import {gotoHref} from './utils/action.js'
+
 const app = createApp(App);
+
+app.config.globalProperties.gotoHref = gotoHref
 
 app.config.globalProperties.iframeUrl = 'http://150.158.185.125:21436/';
 
