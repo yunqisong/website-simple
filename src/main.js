@@ -18,7 +18,7 @@ window.encodeUtf8 = encodeUtf8;
 
 const app = createApp(App);
 
-app.config.globalProperties.iframeUrl = 'http://172.16.31.246:3001/';
+app.config.globalProperties.iframeUrl = 'http://150.158.185.125:21436/';
 
 app
   .directive('resize', {
