@@ -10,8 +10,10 @@ import CommonHeader from '@/components/CommonHeader.vue'
 import AdRow from "@/components/AdRow.vue";
 import AdTime from "@/components/AdTime.vue";
 import AdFoot from "@/components/AdFoot.vue";
+import AdVideo from '@/components/AdVideo.vue'
 import CommonFooter from "@/components/CommonFooter.vue";
-import {ref, computed} from 'vue'
+import SiteNameList from '@/components/SiteNameList.vue'
+import {ref, computed, onMounted, onUnmounted} from 'vue'
 
 const first = ref(null);
 const pro1 = axios.get("/api/base/first").then((res) => {
@@ -46,6 +48,19 @@ const pros = () => {
 }
 
 pros();
+
+const scrollTop = ref(0)
+const getScrollTop = () => {
+  scrollTop.value = document.documentElement.scrollTop
+}
+
+onMounted(() => {
+  addEventListener('scroll', getScrollTop)
+})
+
+onUnmounted(() => {
+  removeEventListener('scroll', getScrollTop)
+})
 </script>
 
 <template>
@@ -59,10 +74,14 @@ pros();
     <!-- 顶部广告 -->
     <AdRow :data="first.a" height="40px" fit="fill"/>
 
-    <div style="position: relative;">
-      <CommonHeader :data="second"/>
+    <div style="position: relative; min-height: 191px; z-index: 999;">
+      <CommonHeader :class="{sticky: scrollTop > 40}" :data="second"/>
     </div>
 
+    <div class="flex" style="margin: 7px 0;">
+      <SiteNameList :data="second.m"/>
+    </div>
+    
     <div class="main">
       <div class="sidebar">
         <AdSideC :data="first.c"/>
@@ -100,15 +119,15 @@ pros();
     
     <!-- 底部广告 -->
     <div class="showCopyRight" style="z-index: 15;">
-      <AdTime :data="first.e"/>
+      <AdTime :data="first.e" :isBlur="true"/>
     </div>
 
     <!-- 两边可放大模块 -->
-    <div class="ad-d ad-d--l" :style="{top: ((i * 110)) + 'px'}" v-for="i in 3" :key="i">
-      <AdRow :data="first.d[i]" fit="fill"/>
+    <div class="ad-d ad-d--l" :style="{top: (100 + (i * 110)) + 'px'}" v-for="i in 3" :key="i">
+      <AdRow v-if="first.d.length > i" :data="first.d[i]" fit="fill"/>
     </div>
-    <div class="ad-d ad-d--r" :style="{top: ((i * 110)) + 'px'}" v-for="i in 2" :key="i">
-      <AdRow :data="first.d[i + 2]" fit="fill"/>
+    <div class="ad-d ad-d--r" :style="{top: (100 + (i * 110)) + 'px'}" v-for="i in 2" :key="i">
+      <AdRow v-if="first.d.length > i+2" :data="first.d[i + 2]" fit="fill"/>
     </div>
 
     <!-- 两边的广告B -->
@@ -117,6 +136,14 @@ pros();
     </div>
     <div class="ad-b ad-b--r">
       <AdTime :data="first.b[1]" fit="contain"/>
+    </div>
+
+    <!-- 视频广告W -->
+    <div v-if="first.w.type == 1" class="ad-w">
+      <AdTime :data="first.w" fit="contain"/>
+    </div>
+    <div v-else class="ad-w">
+      <AdVideo :data="first.w"/>
     </div>
 
     <!-- 开屏广告F -->
@@ -144,11 +171,19 @@ pros();
   }
 }
 
+.sticky {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+  background-color: #fff;
+}
+
 .ad-b {
   position: fixed;
   max-width: 200px;
-  // height: 100px;
-  z-index: 999;
+  z-index: 1001;
   &--l {
    top: 100px;
    left: 10px;
@@ -163,7 +198,7 @@ pros();
   position: fixed;
   max-width: 100px;
   max-height: 100px;
-  z-index: 990;
+  z-index: 1000;
   &:hover {
     transform: scale(1.1);
   }
@@ -175,6 +210,15 @@ pros();
     top: 100px;
     right: 10px;
   }
+}
+
+.ad-w {
+  position: fixed;
+  max-width: 200px;
+  max-height: 200px;
+  z-index: 989;
+  bottom: 58px;
+  right: 0px;
 }
 
 .showCopyRight {

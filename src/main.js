@@ -18,7 +18,6 @@ window.encodeUtf8 = encodeUtf8;
 
 const app = createApp(App);
 
-app.config.globalProperties.isShowIframe = false;
 app.config.globalProperties.iframeUrl = 'http://172.16.31.246:3001/';
 
 app

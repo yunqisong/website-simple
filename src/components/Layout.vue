@@ -1,10 +1,24 @@
 <script setup>
 import CommonHeader from "./CommonHeader.vue";
 import {ref} from 'vue'
+
+const isIframe = ref(false)
+axios.get('/api/base/page/o').then(res => {
+  isIframe.value = !!(+res.data.data)
+})
 </script>
 
 <template>
-  <router-view v-slot="{ Component }">
+  <div v-if="isIframe" class="" style="height: 100vh;">
+    <iframe
+      v-resize="{ log: true }"
+      width="100%"
+      height="100%"
+      :src="iframeUrl"
+      frameborder="0"
+    ></iframe>
+  </div>
+  <router-view v-else v-slot="{ Component }">
     <transition>
       <keep-alive>
         <component
@@ -15,15 +29,6 @@ import {ref} from 'vue'
       </keep-alive>
     </transition>
   </router-view>
-  <!-- <div class="" style="height: 100vh;">
-    <iframe
-      v-resize="{ log: true }"
-      width="100%"
-      height="100%"
-      :src="iframeUrl"
-      frameborder="0"
-    ></iframe>
-  </div> -->
 </template>
 
 <style scoped>
