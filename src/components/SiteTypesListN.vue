@@ -13,13 +13,13 @@ defineProps({
     <el-row>
       <el-col class="flex flex-center-row" v-for="i in ~~(data.length/2)" :key="i" :span="12">
         <span class="text text-l">
-          <a :href="data[(i-1)*2].url">
+          <a @click="gotoHref(data[(i-1)*2].url)">
             {{data[(i-1)*2].name}}
           </a>
         </span>
         <span class="split">|</span>
         <span class="text text-r">
-          <a :href="data[(i-1)*2].url">{{data[2*i-1].name}}</a>
+          <a @click="gotoHref(data[(i-1)*2].url)">{{data[2*i-1].name}}</a>
         </span>
       </el-col>
     </el-row>
